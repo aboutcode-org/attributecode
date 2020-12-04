@@ -84,7 +84,7 @@ Note that I've the following in the default_html.template
 
 
 
-I've uploaded some sample input files:
+I've uploaded some sample input files under the samples/:
 simple_sample.csv
 report_sample.xlsx
 clean-text-0.3.0-lceupi.json
