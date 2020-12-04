@@ -1,0 +1,22 @@
+about_resource: toml-0.10.2-py2.py3-none-any
+name: toml
+version: 0.10.2
+attribute: yes
+copyright: |
+	Copyright 2013-2019 William Pearson
+	Copyright 2015-2016 Julien Enselme
+	Copyright 2016 Google Inc.
+	Copyright 2017 Samuel Vasko
+	Copyright 2017 Nate Prewitt
+	Copyright 2017 Jack Evans
+	Copyright 2019 Filippo Broggini
+description: |
+    A Python library for parsing and creating TOML.
+download_url: https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl
+homepage_url: https://github.com/uiri/toml
+license_expression: mit
+licenses:
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit

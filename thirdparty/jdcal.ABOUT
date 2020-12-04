@@ -1,0 +1,9 @@
+about_resource: jdcal-1.4.1-py2.py3-none-any.whl
+name: jdcal
+version: 1.4.1
+download_url: https://files.pythonhosted.org/packages/f0/da/572cbc0bc582390480bbd7c4e93d14dc46079778ed915b505dc494b37c57/jdcal-1.4.1-py2.py3-none-any.whl
+home_url: https://github.com/phn/jdcal
+dje_license: bsd-simplified
+license_text_file: jdcal.LICENSE
+copyright: Copyright (c) Prasanth Nair prasanthhn@gmail.com
+

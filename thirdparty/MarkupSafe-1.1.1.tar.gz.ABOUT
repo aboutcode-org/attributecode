@@ -1,0 +1,16 @@
+about_resource: MarkupSafe-1.1.1.tar.gz
+name: MarkupSafe
+version: '1.1.1'
+attribute: yes
+contact: armin.ronacher@active-4.com
+copyright: Copyright (c) Armin Ronacher and contributors.
+description: |
+    Implements a XML/HTML/XHTML Markup safe string for Python
+download_url: https://files.pythonhosted.org/packages/b9/2e/64db92e53b86efccfaea71321f597fa2e1b2bd3853d8ce658568f7a13094/MarkupSafe-1.1.1.tar.gz
+homepage_url: https://palletsprojects.com/p/markupsafe/
+license_expression: bsd-new
+licenses:
+    -   file: bsd-new.LICENSE
+        key: bsd-new
+        name: BSD-3-Clause
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:bsd-new

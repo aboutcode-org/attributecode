@@ -1,0 +1,24 @@
+about_resource: setuptools-50.3.2-py3-none-any.whl
+name: setuptools
+version: 50.3.2
+attribute: yes
+contact: distutils-sig@python.org
+copyright: Copyright (c) Python Packaging Authority
+description: |
+    Easily download, build, install, upgrade, and uninstall Python packages
+download_url: https://files.pythonhosted.org/packages/6d/38/c21ef5034684ffc0412deefbb07d66678332290c14bb5269c85145fbd55e/setuptools-50.3.2-py3-none-any.whl
+homepage_url: https://pypi.python.org/pypi/setuptools
+license_expression: python AND mit
+licenses:
+    -   file: python.LICENSE
+        key: python
+        name: Python Software Foundation License v2
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:python
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit
+notice_file: setuptools-50.3.2-py3-none-any.whl.NOTICE
+owner: Python Packaging Authority
+owner_url: https://www.pypa.io/en/latest/
+track_changes: yes

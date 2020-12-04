@@ -1,0 +1,98 @@
+Requirement:
+Python3.6
+
+Setup
+-----
+./configure
+
+After the configuration, activate the virtenv by `. bin/activate`
+
+
+Command
+-------
+Usage: attributecode [OPTIONS] INPUT OUTPUT
+
+Options:
+  --version                    Show the version and exit.
+  -c, --configuration FILE     Path to an optional YAML configuration file for
+                               renaming fields name.
+  --min-license-score INTEGER  Attribute components that have license score
+                               higher than the defined --min-license-score.
+  --scancode                   Indicate the input JSON file is from
+                               scancode_toolkit.
+  --reference DIR              Path to a directory with reference files where
+                               "license_file" and/or "notice_file" located.
+  --template FILE              Path to an optional custom attribution template
+                               to generate the attribution document. If not
+                               provided the default built-in template is used.
+  --vartext <key>=<value>      Add variable text as key=value for use in a
+                               custom attribution template.
+  -q, --quiet                  Do not print error or warning messages.
+  --verbose                    Show all error and warning messages.
+  -h, --help                   Show this message and exit.
+  
+
+
+General explaination
+---------------------
+-c, --configuration
+
+This is used for field renaming purpose.
+The syntax is
+<current>: <new>
+See templates/sample.MAPPING for details.
+
+--scancode
+
+As state in the description, this is to tell the tool which the input is from scancode toolkit.
+Note that we, currently, only accept JSON from scancode-tk.
+
+
+--min-license-score
+
+This is used when we have a scancode's JSON input and want to licenses that have score higher than the `--min-license-score`
+For instance, 
+attributecode --min-license-score 40 --scancode <input.json> <output.html>
+
+It will get all the licenses that have license score 40 or above. Others less than 40 will not be collected.
+Note that this option can only work with the scancode's JSON input, and therefore, the `--scancode` option flag is needed.
+The DEFAULT_LICENSE_SCORE is set to 100
+
+
+--reference
+
+When the input has license_file/notice_file fields set, the tool needs to know where to read these files.
+
+e.g.
+attributecode --reference ~/project/license_notices/ <input.csv> <output.csv>
+
+
+--template
+
+e.g.
+attributecode --template templates/scancode.template --scancode <input.json> <output.html>
+
+"templates/scancode.template" is the custom template specifically for scancode's JSON input. 
+
+
+--vartext <key>=<value>
+
+e.g.
+attributecode --vartext "subtitle=THIS IS A SUBTITLE" <input.csv> <output.csv>
+Note that I've the following in the default_html.template
+<h2> {{ variables['subtitle'] }} </h2>
+
+
+
+I've uploaded some sample input files:
+simple_sample.csv
+report_sample.xlsx
+clean-text-0.3.0-lceupi.json
+
+
+Sample commands to try out:
+attributecode samples/simple_sample.csv <output.html>
+attributecode --vartext "subtitle=THIS IS A SUBTITLE" samples/simple_sample.csv <output.html>
+attributecode -c templates/sample.MAPPING samples/report_sample.xlsx <output.html>
+attributecode --template templates/scancode.template --scancode samples/clean-text-0.3.0-lceupi.json <output.html>
+attributecode --template templates/scancode.template --scancode --min-license-score 30 samples/clean-text-0.3.0-lceupi.json <output.html>

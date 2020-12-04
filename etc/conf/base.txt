@@ -1,0 +1,27 @@
+# Base configuration tools
+certifi
+setuptools
+wheel
+pip
+wincertstore
+
+# used for templating
+jinja2>=2.9.6
+MarkupSafe>=1.0.0
+
+click==6.7
+
+# used by schematics
+six
+
+openpyxl
+
+
+PyYAML >= 3.0, < 4.0
+attrs
+
+# license expression support
+license_expression
+boolean.py
+
+-e .
