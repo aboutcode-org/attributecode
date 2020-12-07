@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'attributecode'
-copyright = '2020, Chin Yeung Li'
-author = 'Chin Yeung Li'
+copyright = '2020, nexB, Inc.'
+author = 'nexB, Inc.'
 
 
 # -- General configuration ---------------------------------------------------
