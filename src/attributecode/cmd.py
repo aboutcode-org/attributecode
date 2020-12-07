@@ -266,7 +266,7 @@ def attributecode(input, output, configuration, scancode, min_license_score, ref
         reference_dir=reference
     )
 
-    licensedb_url = 'https://tdruez.github.io/licenses/'
+    licensedb_url = 'https://scancode-licensedb.aboutcode.org/'
     license_dict, lic_errors = pre_process_and_fetch_license_dict(abouts, licensedb_url, scancode)
     errors.extend(lic_errors)
     sorted_license_dict = sorted(license_dict)
