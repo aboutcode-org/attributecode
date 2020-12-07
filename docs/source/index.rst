@@ -1,20 +1,12 @@
-.. attributecode documentation master file, created by
-   sphinx-quickstart on Mon Dec  7 11:38:22 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+=================================
+AttributeCode Documentation
+=================================
 
-Welcome to attributecode's documentation!
-=========================================
+Welcome to the AttributeCode Documentation.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   General <general.rst>
+   Setup <setup.rst>
+   How To Docs<howto.rst>
