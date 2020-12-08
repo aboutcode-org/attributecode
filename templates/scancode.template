@@ -25,9 +25,10 @@ Read the JSON file to see what information can be extracted from the licenses.
 	<div class="oss-table-of-contents">
 		{% for about_object in abouts %}
 			{% set glob={'handled': True} %}
+			{% set index = loop.index0 %}
 			{% for lic in about_object.licenses.value if lic.score >= min_license_score %} {# license score condition #}
 				{% if glob['handled'] %}
-					<p><a href="#component_{{ loop.index0 }}">{{ about_object.name.value }}{% if about_object.version.value %} {{ about_object.version.value }}{% endif %}</a></p>
+					<p><a href="#component_{{ index }}">{{ about_object.name.value }}{% if about_object.version.value %} {{ about_object.version.value }}{% endif %}</a></p>
 					{% set _ = glob.update({'handled':false}) %}
 				{% endif %}
 			{% endfor %}
@@ -39,6 +40,7 @@ Read the JSON file to see what information can be extracted from the licenses.
 	{% set all_licenses = [] %}
     {% for about_object in abouts %}
 		{% set component_licenses = [] %}
+		{% set index = loop.index0 %}
 		{% for lic in about_object.licenses.value if lic.score >= min_license_score %} {# license score condition #}
 			{% if not lic.key in component_licenses %}
 				{{ component_licenses.append(lic.key)|default("", True) }}
@@ -47,7 +49,7 @@ Read the JSON file to see what information can be extracted from the licenses.
 		{% endfor %}
 	
 		{% if component_licenses %}
-			<div class="oss-component" id="component_{{ loop.index0 }}">
+			<div class="oss-component" id="component_{{ index }}">
 				<h3 class="component-name">{{ about_object.name.value }}
 					{% if about_object.version.value %}{{ about_object.version.value }}{% endif %}
 				</h3>
