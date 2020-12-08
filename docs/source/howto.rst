@@ -1,6 +1,6 @@
-=======
+======
 HOW TO
-=======
+======
 
 .. contents::
    :depth: 3
@@ -14,7 +14,7 @@ Command
 .. code-block:: none
 
     Usage: attributecode [OPTIONS] INPUT OUTPUT
-    
+
     Options:
       --version                    Show the version and exit.
       -c, --configuration FILE     Path to an optional YAML configuration file for
@@ -41,7 +41,7 @@ This is used for field renaming purpose.
 This configuration file is a YAML formatted file.
 
 The syntax is
-<current>: <new>
+``<current>: <new>``
 
 For instance,
 
@@ -54,24 +54,24 @@ For instance,
 --scancode
 ----------
 
-As state in the description, this is to tell the tool that the input is from ScanCode toolkit.
-Note that we, currently, only accept JSON from ScanCode toolkit.
+As stated in the description, this is to tell the tool that the input is from ScanCode Toolkit.
+Note that we currently only accept JSON from ScanCode Toolkit.
 
 
 --min-license-score
 -------------------
 
-This is used when we have a scancode's JSON input and want to show licenses that have score higher than the `--min-license-score`.
-For instance, if we want to show everything that has license score larger than 40
+This is used when we have a ScanCode JSON input and want to show licenses that have a score higher than the ``--min-license-score``.
+For instance, if we want to show everything that has a license score greater than or equal to 40:
 
 .. code-block:: none
 
     attributecode --min-license-score 40 --scancode <input.json> <output.html>
 
-Others detected licenses which license scores are less than 40 will not be collected.
-This option can only work with the scancode's JSON input, and therefore, the `--scancode` option flag is needed.
+Other detected licenses whose license scores are less than 40 will not be collected.
+This option can only work with a ScanCode JSON input, and therefore the ``--scancode`` option flag is needed.
 
-.. Note:: The DEFAULT_LICENSE_SCORE is set to 100
+.. Note:: The ``DEFAULT_LICENSE_SCORE`` is set to 100.
 
 
 --reference
@@ -87,34 +87,36 @@ When the input has "license_file" or "notice_file" fields set, the tool needs to
 --template
 ----------
 
-Point to the custom template
+Point to the custom template.
 
 .. code-block:: none
 
     attributecode --template templates/scancode.template --scancode <input.json> <output.html>
 
-.. Note:: "templates/scancode.template" is a custom template specifically for scancode's JSON input. 
+.. Note:: ``templates/scancode.template`` is a custom template specifically for ScanCode's JSON input.
 
 
 --vartext <key>=<value>
 -----------------------
 
-Pass the varaiable(s) to Jinja2 template
+Pass variable(s) to the Jinja2 template.
 
 .. code-block:: none
 
     attributecode --vartext "subtitle=THIS IS A SUBTITLE" <input.csv> <output.csv>
 
-The above code pass the variable "subtitles" to Jinja2 template. If users want to
-access this variable, the user can simply use {{ variables['subtitle'] }} to get the data.
+The above command passes the variable ``subtitle`` to the Jinja2 template. If users want to
+access this variable, they can simply use ``{{ variables['subtitle'] }}`` to get the data.
 
 
 Examples
 ========
-Some sample input files are under the samples/:
- - simple_sample.csv
- - report_sample.xlsx
- - clean-text-0.3.0-lceupi.json
+
+Some sample input files are under the ``samples/`` directory:
+
+- ``simple_sample.csv``
+- ``report_sample.xlsx``
+- ``clean-text-0.3.0-lceupi.json``
 
 
 Sample commands

@@ -18,8 +18,12 @@
 # -- Project information -----------------------------------------------------
 
 project = 'attributecode'
-copyright = '2020, nexB, Inc.'
-author = 'nexB, Inc.'
+copyright = '2020 nexB Inc.'
+author = 'nexB Inc.'
+
+version = '0.0.1'
+# The full version, including alpha/beta/rc tags
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -27,7 +31,7 @@ author = 'nexB, Inc.'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['recommonmark']
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -45,9 +49,21 @@ master_doc = 'index'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+# html_theme = 'alabaster'
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_context = {
+    'css_files': [
+        '_static/theme_overrides.css',  # override wide tables in RTD theme
+        ],
+    "display_github": True,
+    "github_user": "nexB",
+    "github_repo": "attributecode",
+    "github_version": "develop",  # branch
+    "conf_py_path": "/docs/source/",  # path in the checkout to the docs root
+    }

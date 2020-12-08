@@ -1,14 +1,14 @@
-======
+=====
 Setup
-======
+=====
 
 .. contents::
    :depth: 3
 
-This Section covers the installation/setup process
+This Section covers the installation/setup process.
 
-Requirement:
-============
+Requirement
+===========
 Python3.6
 
 Setup
@@ -19,7 +19,7 @@ Setup
    ./configure
 
 
-After the above configuration, activate the Virtual environment by
+After the above configuration, activate the virtual environment by
 
 .. code-block:: none
 
