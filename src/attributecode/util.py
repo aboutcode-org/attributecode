@@ -166,36 +166,6 @@ def get_absolute(location):
     location = os.path.abspath(location)
     return location
 
-
-def get_locations(location):
-    """
-    Return a list of locations of files given the `location` of a
-    a file or a directory tree containing ABOUT files.
-    File locations are normalized using posix path separators.
-    """
-    location = add_unc(location)
-    location = get_absolute(location)
-    assert os.path.exists(location)
-
-    if os.path.isfile(location):
-        yield location
-    else:
-        for base_dir, _, files in os.walk(location):
-            for name in files:
-                bd = to_posix(base_dir)
-                yield posixpath.join(bd, name)
-
-
-def get_about_locations(location):
-    """
-    Return a list of locations of ABOUT files given the `location` of a
-    a file or a directory tree containing ABOUT files.
-    File locations are normalized using posix path separators.
-    """
-    for loc in get_locations(location):
-        if is_about_file(loc):
-            yield loc
-
 def norm(p):
     """
     Normalize the path

@@ -19,15 +19,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import codecs
-import yaml
 from collections import OrderedDict
-
-# FIXME: why posipath???
-from posixpath import basename
-from posixpath import dirname
-from posixpath import exists
-from posixpath import join
-from posixpath import normpath
 
 from attributecode import ERROR
 from attributecode import CRITICAL
@@ -38,9 +30,6 @@ from attributecode import util
 from attributecode.util import add_unc
 from attributecode.util import csv
 from attributecode.util import file_fields
-from attributecode.util import invalid_chars
-from attributecode.util import to_posix
-from attributecode.util import UNC_PREFIX_POSIX
 from attributecode.util import unique
 
 
@@ -95,17 +84,6 @@ def check_newline_in_file_field(component):
                 pass
     return errors
 
-def check_about_resource_filename(arp):
-    """
-    Return error for invalid/non-support about_resource's filename or
-    empty string if no error is found. 
-    """
-    if invalid_chars(arp):
-        msg = ("Invalid characters present in 'about_resource' "
-                   "field: " + arp)
-        return (Error(CRITICAL, msg))
-    return ''
-
 def load_inventory(location, configuration=None, scancode=False, reference_dir=None):
     """
     Load the inventory file at `location` 
@@ -119,7 +97,6 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
         inventory = util.load_scancode_json(location, configuration)
     else:
         if location.endswith('.csv'):
-            # FIXME: this should not be done here.
             dup_cols_err = check_duplicated_columns(location)
             if dup_cols_err:
                 errors.extend(dup_cols_err)
@@ -148,7 +125,6 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
         ld_errors = about.load_dict(
             component,
             scancode=scancode,
-            running_inventory=False,
             reference_dir=reference_dir,
         )
 
