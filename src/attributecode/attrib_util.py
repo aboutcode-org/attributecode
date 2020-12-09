@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 # ============================================================================
-#  Copyright (c) 2018 nexB Inc. http://www.nexb.com/ - All rights reserved.
+#  Copyright (c) nexB Inc. http://www.nexb.com/ - All rights reserved.
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
@@ -28,20 +28,6 @@ from jinja2.filters import FilterArgumentError
 """
 Extra JINJA2 custom filters and other template utilities.
 """
-
-
-def get_template(template_text):
-    """
-    Return a template built from a text string.
-    Register custom templates as needed.
-    """
-    env = Environment(autoescape=True)
-    # register our custom filters
-    env.filters.update(dict(
-        unique_together=unique_together,
-        multi_sort=multi_sort))
-    return env.from_string(template_text)
-
 
 @environmentfilter
 def multi_sort(environment, value, reverse=False, case_sensitive=False,

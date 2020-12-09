@@ -175,7 +175,7 @@ def run_about_command_test(options, expected_rc=0):
 
 def run_about_command_test_click(options, expected_rc=0, monkeypatch=None,):
     """
-    Run an "about" command as a Click-controlled subprocess with the `options`
+    Run an "attributecode" command as a Click-controlled subprocess with the `options`
     list of options. Return a click.testing.Result object.
 
     If monkeypatch is provided, a tty with a size (80, 43) is mocked.
@@ -188,13 +188,13 @@ def run_about_command_test_click(options, expected_rc=0, monkeypatch=None,):
         monkeypatch.setattr(click , 'get_terminal_size', lambda : (80, 43,))
     runner = CliRunner()
 
-    result = runner.invoke(cmd.about, options, catch_exceptions=False)
+    result = runner.invoke(cmd.attributecode, options, catch_exceptions=False)
 
     output = result.output
     if result.exit_code != expected_rc:
         opts = get_opts(options)
         error = '''
-Failure to run: about %(opts)s
+Failure to run: attributecode %(opts)s
 output:
 %(output)s
 ''' % locals()

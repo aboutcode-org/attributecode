@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 # ============================================================================
-#  Copyright (c) 2013-2020 nexB Inc. http://www.nexb.com/ - All rights reserved.
+#  Copyright (c) nexB Inc. http://www.nexb.com/ - All rights reserved.
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
@@ -47,10 +47,6 @@ from attributecode import INFO
 from attributecode import WARNING
 from attributecode import Error
 from attributecode import util
-from attributecode.util import is_valid_name
-
-
-genereated_tk_version = "# Generated with AboutCode Toolkit Version %s \n\n" % __version__
 
 class Field(object):
     """
@@ -87,7 +83,7 @@ class Field(object):
         return r % locals()
 
 def validate_field_name(name):
-    if not is_valid_name(name):
+    if not util.is_valid_name(name):
         msg = ('Field name: %(name)r is ignored as it contains illegal name characters.')
         return Error(INFO, msg % locals())
 

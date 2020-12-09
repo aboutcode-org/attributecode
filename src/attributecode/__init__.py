@@ -22,13 +22,6 @@ from collections import namedtuple
 import logging
 import os
 
-try:
-    # Python 2
-    unicode  # NOQA
-except NameError:  # pragma: nocover
-    # Python 3
-    unicode = str  # NOQA
-
 import saneyaml
 
 __version__ = '0.0.1'
@@ -53,10 +46,10 @@ class Error(namedtuple('Error', ['severity', 'message'])):
     """
     def __new__(self, severity, message):
         if message:
-            if isinstance(message, unicode):
+            if isinstance(message, str):
                 message = self._clean_string(message)
             else:
-                message = self._clean_string(unicode(repr(message), encoding='utf-8'))
+                message = self._clean_string(str(repr(message), encoding='utf-8'))
                 message = message.strip('"')
 
         return super(Error, self).__new__(

@@ -1,24 +1,22 @@
-Usage: about [OPTIONS] COMMAND [ARGS]...
+Usage: attributecode [OPTIONS] INPUT OUTPUT
 
-  Generate licensing attribution and credit notices from .ABOUT files and
-  inventories.
-
-  Read, write and collect provenance and license inventories from .ABOUT files
-  to and from JSON or CSV files.
-
-  Use about <command> --help for help on a command.
+  Generate attribution from JSON, CSV or Excel file.
 
 Options:
-  --version   Show the version and exit.
-  -h, --help  Show this message and exit.
-
-Commands:
-  attrib              Generate an attribution document from .ABOUT files.
-  check               Validate that the format of .ABOUT files is correct and
-                      report errors and warnings.
-  collect_redist_src  Collect redistributable sources.
-  gen                 Generate .ABOUT files from an inventory as CSV or JSON.
-  inventory           Collect the inventory of .ABOUT files to a CSV or JSON
-                      file.
-  transform           Transform a CSV/JSON by applying renamings, filters and
-                      checks.
+  --version                    Show the version and exit.
+  -c, --configuration FILE     Path to an optional YAML configuration file for
+                               renaming fields name.
+  --min-license-score INTEGER  Attribute components that have license score
+                               higher than the defined --min-license-score.
+  --scancode                   Indicate the input JSON file is from
+                               scancode_toolkit.
+  --reference DIR              Path to a directory with reference files where
+                               "license_file" and/or "notice_file" located.
+  --template FILE              Path to an optional custom attribution template
+                               to generate the attribution document. If not
+                               provided the default built-in template is used.
+  --vartext <key>=<value>      Add variable text as key=value for use in a
+                               custom attribution template.
+  -q, --quiet                  Do not print error or warning messages.
+  --verbose                    Show all error and warning messages.
+  -h, --help                   Show this message and exit.
