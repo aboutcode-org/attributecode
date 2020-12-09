@@ -79,7 +79,6 @@ else:
     raise Exception('Unsupported OS/platform %r' % sys_platform)
     platform_names = tuple()
 
-
 # common file basenames for requirements and scripts
 base = ('base',)
 
@@ -97,6 +96,8 @@ shell_scripts = tuple(p + '.sh' for p in platform_names)
 if on_win:
     shell_scripts = ('win.bat',)
 
+if sys.version_info[0] < 3:
+    raise Exception('Unsupported Python version: python3 is required.')
 
 def call(cmd, root_dir):
     """ Run a `cmd` command (as a list of args) with all env vars."""
