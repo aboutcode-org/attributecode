@@ -82,7 +82,7 @@ Read the JSON file to see what information can be extracted from the licenses.
     {% endfor %}
 
     <h3><a id="End">End</a></h3>
-    <i>This file was generated with Attribute Code version: {{ tkversion }} on: {{ utcnow }} (UTC)</i>
+    <i>This file was generated with AttributeCode version: {{ tkversion }} on: {{ utcnow }} (UTC)</i>
     </body>
 </html>
 

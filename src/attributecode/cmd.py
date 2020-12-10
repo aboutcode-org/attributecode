@@ -35,10 +35,10 @@ from attributecode import severities
 from attributecode.attrib import check_template
 from attributecode.attrib import DEFAULT_TEMPLATE_FILE, DEFAULT_LICENSE_SCORE
 from attributecode.attrib import generate_and_save as generate_attribution_doc
-from attributecode.gen import load_inventory
 from attributecode.model import pre_process_and_fetch_license_dict
 from attributecode.util import filter_errors
 from attributecode.util import get_file_text
+from attributecode.util import load_inventory
 
 
 __copyright__ = """
@@ -244,6 +244,9 @@ def parse_key_values(key_values):
 
 @click.help_option('-h', '--help')
 def attributecode(input, output, configuration, scancode, min_license_score, reference, template, vartext, quiet, verbose):
+    """
+Generate attribution from JSON, CSV or Excel file.
+    """
     if scancode:
         if not input.endswith('.json'):
             msg = 'The input file from scancode toolkit needs to be in JSON format.'
