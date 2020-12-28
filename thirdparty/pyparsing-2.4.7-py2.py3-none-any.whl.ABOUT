@@ -1,0 +1,16 @@
+about_resource: pyparsing-2.4.7-py2.py3-none-any.whl
+name: pyparsing
+version: 2.4.7
+attribute: yes
+
+copyright: Copyright (c) Paul McGuire
+description: |
+    The pyparsing module is an alternative approach to creating and executing simple grammars, vs. the traditional lex/yacc approach, or the use of regular expressions. The pyparsing module provides a library of classes that client code uses to construct the grammar directly in Python code.
+download_url: https://files.pythonhosted.org/packages/8a/bb/488841f56197b13700afd5658fc279a2025a39e22449b7cf29864669b15d/pyparsing-2.4.7-py2.py3-none-any.whl
+homepage_url: https://github.com/pyparsing/pyparsing/
+license_expression: mit
+licenses:
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit

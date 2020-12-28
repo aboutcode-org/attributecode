@@ -1,0 +1,12 @@
+about_resource: et_xmlfile-1.0.1-py3-none-any.whl
+name: et_xmlfile
+version: 1.0.1
+copyright: Copyright (c) openpyxl project
+description: An implementation of lxml.xmlfile for the standard library
+license_expression: mit
+licenses:
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit
+

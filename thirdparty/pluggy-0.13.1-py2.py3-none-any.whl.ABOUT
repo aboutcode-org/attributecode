@@ -1,0 +1,20 @@
+about_resource: pluggy-0.13.1-py2.py3-none-any.whl
+name: pluggy
+version: 0.13.1
+attribute: yes
+
+contact: pytest-dev@python.org
+copyright: Copyright (c) Holger Krekel
+description: |
+    Plugin and hook calling mechanisms for python
+download_url: https://files.pythonhosted.org/packages/a0/28/85c7aa31b80d150b772fbe4a229487bc6644da9ccb7e427dd8cc60cb8a62/pluggy-0.13.1-py2.py3-none-any.whl
+homepage_url: https://github.com/pytest-dev/pluggy
+license_expression: mit
+licenses:
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit
+notice_file: pluggy-0.13.1-py2.py3-none-any.whl.NOTICE
+owner: pytest-dev
+owner_url: https://github.com/pytest-dev

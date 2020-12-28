@@ -1,0 +1,21 @@
+about_resource: attrs-20.3.0-py2.py3-none-any.whl
+name: attrs
+version: 20.3.0
+attribute: yes
+
+copyright: Copyright (c) Hynek Schlawack
+description: |
+    attrs is the Python package that will bring back the joy of writing classes by relieving you from the drudgery of implementing object protocols (aka dunder methods).
+
+    Its main goal is to help you to write concise and correct software without slowing down your code.
+download_url: https://files.pythonhosted.org/packages/c3/aa/cb45262569fcc047bf070b5de61813724d6726db83259222cd7b4c79821a/attrs-20.3.0-py2.py3-none-any.whl
+homepage_url: http://attrs.org
+license_expression: mit
+licenses:
+    -   file: mit.LICENSE
+        key: mit
+        name: MIT License
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:license:mit
+notice_file: attrs-20.3.0-py2.py3-none-any.whl.NOTICE
+owner: Hynek Schlawack
+owner_url: http://attrs.org
