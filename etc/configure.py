@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Copyright (c) 2018 nexB Inc. http://www.nexb.com/ - All rights reserved.
+# Copyright (c) nexB Inc. http://www.nexb.com/ - All rights reserved.
 
 """
 This script is a configuration helper to select pip requirement files to install
@@ -133,6 +133,7 @@ def clean(root_dir):
                    .Python
                    .cache
                    pip-selfcheck.json
+                   tmp
                    '''.split()
 
     # also clean __pycache__ if any
@@ -142,7 +143,9 @@ def clean(root_dir):
         try:
             loc = os.path.join(root_dir, d)
             if os.path.exists(loc):
-                if os.path.isdir(loc):
+                if os.path.islink(loc):
+                    os.unlink(loc)
+                elif os.path.isdir(loc):
                     shutil.rmtree(loc)
                 else:
                     os.remove(loc)
@@ -227,7 +230,7 @@ def install_3pp(configs, root_dir, tpp_dirs, quiet=False):
     else:
         base_cmd = ['pip']
     for req_file in requirement_files:
-        pcmd = base_cmd + ['install', '--upgrade', '--no-index', '--no-cache-dir']
+        pcmd = base_cmd + ['install', '--upgrade', '--no-index', '--no-cache-dir', '--no-warn-script-location']
         if quiet:
             pcmd += ['--quiet']
         pip_dir_args = list(build_pip_dirs_args(tpp_dirs, root_dir, '--find-links='))

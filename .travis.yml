@@ -15,7 +15,7 @@ python:
   - "3.8"
 
 # Scripts to run at install stage
-install: ./configure
+install: ./configure etc/conf/dev
 
 # Scripts to run at script stage
-script: tmp/bin/pytest
+script: bin/pytest

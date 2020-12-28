@@ -21,7 +21,7 @@
 @rem ################################
 @rem # Defaults. Change these variables to customize this script locally
 @rem ################################
-@rem # you can define one or more thirdparty dirs, each where the varibale name
+@rem # you can define one or more thirdparty dirs, each where the variable name
 @rem # is prefixed with TPP_DIR
 set "TPP_DIR=thirdparty"
 
@@ -41,7 +41,7 @@ set SUPPORTED_PYTHON3=3.6
 set CFG_ROOT_DIR=%~dp0
 
 @rem path where a configured Python should live in the current virtualenv if installed
-set CONFIGURED_PYTHON=%CFG_ROOT_DIR%Scripts\python.exe
+set CONFIGURED_PYTHON=%CFG_ROOT_DIR%bin\python.exe
 
 set PYTHON_EXECUTABLE=
 
@@ -91,24 +91,14 @@ if %ERRORLEVEL% == 0 (
     if %ERRORLEVEL% == 0 (
         set PYTHON_EXECUTABLE=py -3.6
     ) else (
-        @rem we have no required python 3, let's try python 2:
-        py -2 --version >nul 2>nul
-        if %ERRORLEVEL% == 0 (
-            set PYTHON_EXECUTABLE=py -2
-        ) else (
-            @rem we have py and no python 3 and 2, exit
-            echo * Unable to find an installation of Python.
-            exit /b 1
-        )
+        @rem we have py and no python 3, exit
+        echo * Unable to find an installation of Python.
+        exit /b 1
     )
 ) else (
-    @rem we have no py launcher, check for a default Python 2 installation
-    if not exist ""%DEFAULT_PYTHON2%"" (
-       echo * Unable to find an installation of Python.
-       exit /b 1
-    ) else (
-        set PYTHON_EXECUTABLE=%DEFAULT_PYTHON2%
-    )
+    @rem we have no py launcher
+    echo * Unable to find an installation of Python.
+    exit /b 1
 )
 
 :run
@@ -117,7 +107,6 @@ if %ERRORLEVEL% == 0 (
 set PYTHONDONTWRITEBYTECODE=1
 
 call %PYTHON_EXECUTABLE% "%CFG_ROOT_DIR%etc\configure.py" %CFG_CMD_LINE_ARGS%
-
 
 @rem Return a proper return code on failure
 if %ERRORLEVEL% neq 0 (
