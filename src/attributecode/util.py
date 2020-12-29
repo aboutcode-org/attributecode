@@ -113,7 +113,7 @@ def load_excel(location, configuration=None):
     while index <= max_col:
         value = sheet_obj.cell(row=1, column=index).value
         if value in col_keys:
-            msg = 'Duplicated column name, ' + value + ', detected.' 
+            msg = 'Duplicated column name, ' + str(value) + ', detected.' 
             errors.append(Error(CRITICAL, msg))
             return errors, results
         if value in mapping_dict:
@@ -273,7 +273,8 @@ def get_file_text(file_name, reference):
         msg = "The file " + file_path + " does not exist"
         error = Error(CRITICAL, msg)
     else:
-        with io.open(file_path, encoding='utf-8') as txt:
+        with codecs.open(file_path, 'rb', encoding='utf-8-sig', errors='replace') as txt:
+        #with io.open(file_path, encoding='utf-8') as txt:
             text = txt.read()
     return error, text
 

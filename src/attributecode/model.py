@@ -48,6 +48,7 @@ from attributecode import WARNING
 from attributecode import Error
 from attributecode import util
 
+
 class Field(object):
     """
     An ABOUT file field. The initial value is a string. Subclasses can and
@@ -245,7 +246,7 @@ class About(object):
         self.errors = errors
         return errors
 
-def pre_process_and_fetch_license_dict(abouts, url, scancode):
+def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     """
     Parse the license expression from the about object and return a dictionary
     list with license key as a key and its corresponding license information as
@@ -297,9 +298,22 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode):
                     captured_license.append(lic_key)
                     license_data_dict[lic_key] = license_dict
                 except urllib.error.HTTPError:
-                    msg = ("One of the URLs (or both) is not reachable: " + '\n' +
-                        license_url + '\n' + license_text_url)
-                    errors.append(Error(ERROR, msg)) 
+                    # license_expression key not found in LicenseDB
+                    # but license_file field present
+                    if about.license_file.value:
+                        file_name = about.license_file.value
+                        error, text = util.get_file_text(file_name, reference)
+                        if not error:
+                            license_dict = {}
+                            license_dict['key'] = lic_key
+                            license_dict['license_text'] = text
+                            license_data_dict[lic_key] = license_dict
+                        else:
+                            errors.append(error)
+                    else:
+                        msg = ("One of the URLs (or both) is not reachable: " + '\n' +
+                            license_url + '\n' + license_text_url)
+                        errors.append(Error(ERROR, msg)) 
                 except:
                     msg = "License key, " + lic_key + ", not recognize."
                     errors.append(Error(ERROR, msg))
