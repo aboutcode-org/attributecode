@@ -113,7 +113,7 @@ def load_excel(location, configuration=None):
     while index <= max_col:
         value = sheet_obj.cell(row=1, column=index).value
         if value in col_keys:
-            msg = 'Duplicated column name, ' + value + ', detected.' 
+            msg = 'Duplicated column name, ' + str(value) + ', detected.' 
             errors.append(Error(CRITICAL, msg))
             return errors, results
         if value in mapping_dict:
@@ -164,15 +164,12 @@ def load_json(location):
     Read JSON file at `location` and return a list of ordered dicts, one for
     each entry.
     """
-    # FIXME: IMHO we should know where the JSON is from and its shape
-    # FIXME use: object_pairs_hook=OrderedDict
     with open(location) as json_file:
         results = json.load(json_file)
-
     if isinstance(results, list):
         results = sorted(results)
     else:
-        results = list(results)
+        results = [results]
     return results
 
 
@@ -276,7 +273,8 @@ def get_file_text(file_name, reference):
         msg = "The file " + file_path + " does not exist"
         error = Error(CRITICAL, msg)
     else:
-        with io.open(file_path, encoding='utf-8') as txt:
+        with codecs.open(file_path, 'rb', encoding='utf-8-sig', errors='replace') as txt:
+        #with io.open(file_path, encoding='utf-8') as txt:
             text = txt.read()
     return error, text
 
@@ -368,17 +366,14 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
 
     for component in inventory:
         about = model.About(component)
-
         ld_errors = about.load_dict(
             component,
             scancode=scancode,
             reference_dir=reference_dir,
         )
-
         for e in ld_errors:
             if not e in errors:
                 errors.extend(ld_errors)
-
         abouts.append(about)
 
     return unique(errors), abouts

@@ -1,7 +1,0 @@
-about_resource: .
-name: boolean_data
-attribute: False
-modified: true
-internal_use_only: no
-redistribute: yes
-track_changes:

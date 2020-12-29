@@ -22,8 +22,6 @@ from collections import namedtuple
 import logging
 import os
 
-import saneyaml
-
 __version__ = '0.0.1'
 
 __copyright__ = """

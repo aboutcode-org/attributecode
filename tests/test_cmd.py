@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 # ============================================================================
-#  Copyright (c) 2014-2019 nexB Inc. http://www.nexb.com/ - All rights reserved.
+#  Copyright (c) nexB Inc. http://www.nexb.com/ - All rights reserved.
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
@@ -348,14 +348,14 @@ def check_about_stdout(options, expected_loc, regen=False):
     result = run_about_command_test_click(options)
     if regen:
         expected_file = get_test_loc(expected_loc, must_exists=False)
-        with open(expected_file, 'wb') as ef:
-            ef.write(result.output_bytes)
+        with open(expected_file, 'w') as ef:
+            ef.write(result.output_b)
 
     expected_file = get_test_loc(expected_loc, must_exists=True)
-    with open(expected_file, 'rb') as ef:
+    with open(expected_file, 'r') as ef:
         expected = ef.read()
 
-    assert expected.splitlines(False) == result.output_bytes.splitlines(False)
+    assert expected.splitlines(False) == result.output.splitlines(False)
 
 
 def test_about_help_text():

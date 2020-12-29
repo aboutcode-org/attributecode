@@ -1,0 +1,20 @@
+about_resource: packaging-20.8-py2.py3-none-any.whl
+name: packaging
+version: 20.8
+copyright: Copyright (c) Donald Stufft
+description: |
+	Reusable core utilities for various Python Packaging interoperability specifications.
+	This library provides utilities that implement the interoperability specifications which have clearly one correct behaviour (eg: PEP 440) or benefit greatly from having a single shared implementation (eg: PEP 425).
+	The packaging project includes the following: version handling, specifiers, markers, requirements, tags, utilities.
+download_url: https://files.pythonhosted.org/packages/b1/a7/588bfa063e7763247ab6f7e1d994e331b85e0e7d09f853c59a6eb9696974/packaging-20.8-py2.py3-none-any.whl
+homepage_url: https://github.com/pypa/packaging
+license_expression: bsd-simplified OR apache-2.0
+licenses:
+    -   file: bsd-simplified.LICENSE
+        key: bsd-simplified
+        name: BSD-2-Clause
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:bsd-simplified
+    -   file: apache-2.0.LICENSE
+        key: apache-2.0
+        name: Apache-2.0
+        url: https://enterprise.dejacode.com/urn/?urn=urn:dje:apache-2.0
