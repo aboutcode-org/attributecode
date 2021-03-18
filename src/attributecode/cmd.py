@@ -206,6 +206,11 @@ def parse_key_values(key_values):
     type=click.Path(exists=True, dir_okay=False, readable=True, resolve_path=True),
     help='Path to an optional YAML configuration file for renaming fields name.')
 
+@click.option('--licensedb-url',
+    metavar='URL',
+    type=click.STRING,
+    help='URL to the custom LicenseDB (default: https://scancode-licensedb.aboutcode.org/')
+
 @click.option('--min-license-score',
     type=int,
     help='Attribute components that have license score higher than the defined '
@@ -243,7 +248,7 @@ def parse_key_values(key_values):
     help='Show all error and warning messages.')
 
 @click.help_option('-h', '--help')
-def attributecode(input, output, configuration, scancode, min_license_score, reference, template, vartext, quiet, verbose):
+def attributecode(input, output, configuration, licensedb_url, scancode, min_license_score, reference, template, vartext, quiet, verbose):
     """
 Generate attribution from JSON, CSV or Excel file.
     """
@@ -262,6 +267,15 @@ Generate attribution from JSON, CSV or Excel file.
             click.echo(msg)
             sys.exit(1)
 
+    if licensedb_url:
+        if not licensedb_url.startswith('http'):
+            msg = ('licensedb-url is not valid.')
+            click.echo(msg)
+            sys.exit(1)
+        license_db_url = licensedb_url
+    else:
+        license_db_url = 'https://scancode-licensedb.aboutcode.org/'
+
     errors, abouts = load_inventory(
         location=input,
         configuration=configuration,
@@ -269,8 +283,7 @@ Generate attribution from JSON, CSV or Excel file.
         reference_dir=reference
     )
 
-    licensedb_url = 'https://scancode-licensedb.aboutcode.org/'
-    license_dict, lic_errors = pre_process_and_fetch_license_dict(abouts, licensedb_url, scancode, reference)
+    license_dict, lic_errors = pre_process_and_fetch_license_dict(abouts, license_db_url, scancode, reference)
     errors.extend(lic_errors)
     sorted_license_dict = sorted(license_dict)
 
