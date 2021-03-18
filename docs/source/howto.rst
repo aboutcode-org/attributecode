@@ -5,7 +5,7 @@ HOW TO
 .. contents::
    :depth: 3
 
-This Section covers the basic usage of the commands and options.
+This section covers the basic usage of the command and options.
 
 
 Command

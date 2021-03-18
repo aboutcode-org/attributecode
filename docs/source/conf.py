@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'attributecode'
-copyright = '2020 nexB Inc.'
+copyright = '2020 - 2021 nexB Inc.'
 author = 'nexB Inc.'
 
 version = '0.0.1'
