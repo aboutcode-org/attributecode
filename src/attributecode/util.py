@@ -365,7 +365,7 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
         return errors, abouts
 
     for component in inventory:
-        about = model.About(component)
+        about = model.About()
         ld_errors = about.load_dict(
             component,
             scancode=scancode,

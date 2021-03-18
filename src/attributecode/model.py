@@ -49,6 +49,7 @@ from attributecode import Error
 from attributecode import util
 
 
+
 class Field(object):
     """
     An ABOUT file field. The initial value is a string. Subclasses can and
@@ -80,7 +81,7 @@ class Field(object):
     def __repr__(self):
         name = self.name
         value = self.value
-        r = ('Field(name=%(name)r, value=%(value)r')
+        r = ('Field(name=%(name)r, value=%(value)r)')
         return r % locals()
 
 def validate_field_name(name):
@@ -131,6 +132,9 @@ class About(object):
         self.set_standard_fields()
         self.custom_fields = OrderedDict()
         self.errors = []
+
+    def __repr__(self):
+        return repr(self.all_fields())
 
     def all_fields(self):
         """
