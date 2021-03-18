@@ -7,6 +7,9 @@ Options:
   -c, --configuration FILE     Path to an optional YAML configuration file for
                                renaming fields name.
 
+  --licensedb-url URL          URL to the custom LicenseDB (default:
+                               https://scancode-licensedb.aboutcode.org/
+
   --min-license-score INTEGER  Attribute components that have license score
                                higher than the defined --min-license-score.
 
