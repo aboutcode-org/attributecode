@@ -9,16 +9,16 @@ Read more about AttributeCode `here <https://nexb-attributecode.readthedocs-host
 Features
 ========
 
- - Accept data from multiple formats:
-      - A spreadsheet file (csv or xlsx)
-      - A JSON file format for Attribution that would have the primary Attribution fields
-      - A ScanCode JSON file.
+- Accept data from multiple formats:
+   - A spreadsheet file (csv or xlsx)
+   - A JSON file format for Attribution that would have the primary Attribution fields
+   - A ScanCode JSON file.
  
- - A configuration option to map input data to Attribution output fields.
+- A configuration option to map input data to Attribution output fields.
 
- - Jinja templates to customize the Attribution Notice output.
+- Jinja templates to customize the Attribution Notice output.
 
- - Access to a database of license texts based on ScanCode license keys.
+- Access to a database of license texts based on ScanCode license keys.
 
 Build and tests status
 ======================
