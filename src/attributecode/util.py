@@ -148,7 +148,10 @@ def load_scancode_json(location, configuration=None):
         results = json.load(json_file)
     results = results['files']
     if mapping_dict:
-        for item in results:
+        # Copy to a new list to avoid the following error:
+        # RuntimeError: dictionary keys changed during iteration
+        results_copy = results.copy()
+        for item in results_copy:
             for key in item:
                 if key in mapping_dict:
                     item[mapping_dict[key]] = item[key]
