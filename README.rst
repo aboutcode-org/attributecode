@@ -1,34 +1,94 @@
-A Simple Python Project Skeleton
-================================
-This repo attempts to standardize our python repositories using modern python
-packaging and configuration techniques. Using this `blog post`_ as inspiration, this
-repository will serve as the base for all new python projects and will be adopted to all 
-our existing ones as well.
+=============
+AttributeCode
+=============
 
-.. _blog post: https://blog.jaraco.com/a-project-skeleton-for-python-projects/
+Tool for Attribution Notice generation.
 
-Usage
-=====
-A brand new project
--------------------
-.. code-block:: bash
+Read more about AttributeCode `here <https://nexb-attributecode.readthedocs-hosted.com/en/latest/>`_.
 
-    git init my-new-repo
-    cd my-new-repo
-    git pull git@github.com:nexB/skeleton
+Features
+========
 
-    # Create the new repo on GitHub, then update your remote
-    git remote set-url origin git@github.com:nexB/your-new-repo.git
+ - Accept data from multiple formats:
+      - A spreadsheet file (csv or xlsx)
+      - A JSON file format for Attribution that would have the primary Attribution fields
+      - A ScanCode JSON file.
+ 
+ - A configuration option to map input data to Attribution output fields.
 
-From here, you can make the appropriate changes to the files for your specific project.
+ - Jinja templates to customize the Attribution Notice output.
 
-Update an existing project
----------------------------
-.. code-block:: bash
+ - Access to a database of license texts based on ScanCode license keys.
 
-    cd my-existing-project
-    git remote add skeleton git@github.com:nexB/skeleton
-    git fetch skeleton
-    git merge skeleton/main --allow-unrelated-histories
+Build and tests status
+======================
 
-This is also the workflow to use when updating the skeleton files in any given repository.
++-------+-----------------+
+|Branch | **Linux/macOS** |
++=======+=================+
+|Master | |master-posix|  |
++-------+-----------------+
+|Develop| |devel-posix|   |
++-------+-----------------+
+
+
+REQUIREMENTS
+------------
+Python3.6
+
+On Linux and Mac, Python is typically pre-installed. To verify which
+version may be pre-installed, open a terminal and type:
+
+    python --version
+
+On Windows or Mac, you can download the latest Python here:
+    https://www.python.org/downloads/
+
+Download the .msi installer for Windows or the .dmg archive for Mac.
+Open and run the installer using all the default options.
+
+
+INSTALLATION
+------------
+Checkout or download and extract the AttributeCode from:
+    https://github.com/nexB/attributecode
+
+
+Read the `setup process <https://nexb-attributecode.readthedocs-hosted.com/en/latest/setup.html>`_.
+
+
+HELP and SUPPORT
+----------------
+If you have a question or find a bug, enter a ticket at:
+
+    https://github.com/nexB/attributecode
+
+For issues, you can use:
+
+    https://github.com/nexB/attributecode/issues
+
+
+SOURCE CODE
+-----------
+The AttributeCode is available through GitHub. For the latest version visit:
+    https://github.com/nexB/attributecode
+
+
+HACKING
+-------
+We accept pull requests provided under the same license as this tool.
+You agree to the http://developercertificate.org/ 
+
+
+LICENSE
+-------
+The AttributeCode is released under the Apache 2.0 license.
+See the about.ABOUT file for details.
+
+
+.. |master-posix| image:: https://travis-ci.com/nexB/attributecode.svg?token=ZArT61KxUUN1suHGWjDF&branch=main
+    :target: https://travis-ci.com/github/nexB/attributecode
+    :alt: Linux Master branch tests status
+.. |devel-posix| image:: https://travis-ci.com/nexB/attributecode.svg?token=ZArT61KxUUN1suHGWjDF&branch=develop
+    :target: https://travis-ci.com/github/nexB/attributecode
+    :alt: Linux Develop branch tests status
