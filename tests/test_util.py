@@ -197,3 +197,88 @@ class TestMiscUtils(unittest.TestCase):
 
         assert abouts[0].license_expression.value == 'bsd-new and mit'
         assert abouts[1].license_expression.value == 'mit'
+
+    def test_load_inventory_simple_xlsx(self):
+        location = get_test_loc('test_util/load/simple_sample.xlsx')
+        base_dir = get_temp_dir()
+        errors, abouts = util.load_inventory(location)
+        assert errors == []
+
+        assert abouts[0].name.value == 'cryptohash-sha256'
+        assert abouts[1].name.value == 'some_component'
+        
+        assert abouts[0].version.value == 'v 0.11.100.1'
+        assert abouts[1].version.value == 'v 0.0.1'
+
+        assert abouts[0].license_expression.value == 'bsd-new and mit'
+        assert abouts[1].license_expression.value == 'mit'
+
+
+    def test_load_scancode_json(self):
+        location = get_test_loc('test_util/load/clean-text-0.3.0-lceupi.json')
+        base_dir = get_temp_dir()
+        configuration = None
+        inventory = util.load_scancode_json(location, configuration)
+
+        expected = {'path': 'clean-text-0.3.0', 'type': 'directory',
+                    'name': 'clean-text-0.3.0', 'base_name': 'clean-text-0.3.0',
+                    'extension': '', 'size': 0, 'date': None, 'sha1': None,
+                    'md5': None, 'sha256': None, 'mime_type': None, 'file_type': None,
+                    'programming_language': None, 'is_binary': False, 'is_text': False,
+                    'is_archive': False, 'is_media': False, 'is_source': False,
+                    'is_script': False, 'licenses': [], 'license_expressions': [],
+                    'percentage_of_license_text': 0, 'copyrights': [], 'holders': [],
+                    'authors': [], 'packages': [], 'emails': [], 'urls': [], 'files_count': 9,
+                    'dirs_count': 1, 'size_count': 32826, 'scan_errors': []}
+
+        # We will only check the first element in the inventory list 
+        assert inventory[0] == expected
+
+    def test_load_scancode_json_with_conf(self):
+        location = get_test_loc('test_util/load/clean-text-0.3.0-lceupi.json')
+        base_dir = get_temp_dir()
+        configuration = get_test_loc('test_util/load/key.config')
+        inventory = util.load_scancode_json(location, configuration)
+
+        expected = {'resource': 'clean-text-0.3.0', 'type': 'directory',
+                    'name': 'clean-text-0.3.0', 'base_name': 'clean-text-0.3.0',
+                    'extension': '', 'size': 0, 'date': None, 'sha1': None,
+                    'md5': None, 'sha256': None, 'mime_type': None, 'file_type': None,
+                    'programming_language': None, 'is_binary': False, 'is_text': False,
+                    'is_archive': False, 'is_media': False, 'is_source': False,
+                    'is_script': False, 'licenses': [], 'license_expressions': [],
+                    'percentage_of_license_text': 0, 'copyrights': [], 'holders': [],
+                    'authors': [], 'packages': [], 'emails': [], 'urls': [], 'files_count': 9,
+                    'dirs_count': 1, 'size_count': 32826, 'scan_errors': []}
+
+        # We will only check the first element in the inventory list 
+        assert inventory[0] == expected
+
+    def test_load_csv_with_conf(self):
+        location = get_test_loc('test_util/load/simple_sample.csv')
+        base_dir = get_temp_dir()
+        configuration = get_test_loc('test_util/load/key.config')
+        inventory = util.load_csv(location, configuration)
+
+        expected = [OrderedDict([('name', 'cryptohash-sha256'), ('version', 'v 0.11.100.1'),
+                                 ('license_expression', 'bsd-new and mit'),
+                                 ('resource', '/project/cryptohash-sha256')]),
+                    OrderedDict([('name', 'some_component'), ('version', 'v 0.0.1'),
+                                ('license_expression', 'mit'),
+                                ('resource', '/project/some_component')])]
+        assert inventory == expected
+
+    def test_load_xlsx_with_conf(self):
+        location = get_test_loc('test_util/load/simple_sample.xlsx')
+        base_dir = get_temp_dir()
+        configuration = get_test_loc('test_util/load/key.config')
+        dup_cols_err, inventory = util.load_excel(location, configuration)
+
+        expected = [OrderedDict([('name', 'cryptohash-sha256'), ('version', 'v 0.11.100.1'),
+                                 ('license_expression', 'bsd-new and mit'),
+                                 ('resource', '/project/cryptohash-sha256')]),
+                    OrderedDict([('name', 'some_component'), ('version', 'v 0.0.1'),
+                                ('license_expression', 'mit'),
+                                ('resource', '/project/some_component')])]
+        assert inventory == expected
+        assert dup_cols_err == []
