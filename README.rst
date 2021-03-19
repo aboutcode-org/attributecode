@@ -50,7 +50,7 @@ Open and run the installer using all the default options.
 
 INSTALLATION
 ------------
-Checkout or download and extract the AttributeCode from:
+Checkout the AttributeCode from:
     https://github.com/nexB/attributecode
 
 
