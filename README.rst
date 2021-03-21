@@ -86,9 +86,9 @@ The AttributeCode is released under the Apache 2.0 license.
 See the about.ABOUT file for details.
 
 
-.. |master-posix| image:: https://travis-ci.com/nexB/attributecode.svg?token=ZArT61KxUUN1suHGWjDF&branch=main
+.. |master-posix| image:: https://travis-ci.com/nexB/attributecode.svg?branch=main
     :target: https://travis-ci.com/github/nexB/attributecode
     :alt: Linux Master branch tests status
-.. |devel-posix| image:: https://travis-ci.com/nexB/attributecode.svg?token=ZArT61KxUUN1suHGWjDF&branch=develop
+.. |devel-posix| image:: https://travis-ci.com/nexB/attributecode.svg?branch=develop
     :target: https://travis-ci.com/github/nexB/attributecode
     :alt: Linux Develop branch tests status
