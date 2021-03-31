@@ -21,7 +21,7 @@ project = 'attributecode'
 copyright = '2020 - 2021 nexB Inc.'
 author = 'nexB Inc.'
 
-version = '0.0.1'
+version = '1.0.0'
 # The full version, including alpha/beta/rc tags
 release = version
 
