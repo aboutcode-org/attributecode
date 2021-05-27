@@ -7,18 +7,17 @@ General
 
 Objective
 =========
-- Create an Attribution Notice generation tool that can be used with different types of input (e.g., spreadsheet, json etc.).
-- Take the opportunity to create the best-in-class FOSS Attribution Notice generation tool.
-- Provide a customizable Attribution Notice generation tool for DejaCode.
-
+- Create an Attribution Notice generation tool that can be used with many different types of input - e.g., spreadsheet, JSON and others.
+- Provide a customizable Attribution Notice generation tool for ScanCode.
 
 Features
 ========
-- Accept data from multiple formats starting with:
+- Accept data in multiple formats starting with:
 
   - A spreadsheet file (csv or xlsx).
-  - A JSON file format for Attribution that would have the primary Attribution fields.
-  - A ScanCode JSON file.
+  - A ScanCode JSON file. 
+  - Any JSON file format that has the primary Attribution fields.
+
 
 - A configuration option to map input data to Attribution output fields.
 - Jinja templates to customize the Attribution Notice output.
@@ -33,7 +32,7 @@ Input Requirement
    The following are special characters that the tool does not support:
    ['!', '@', '#', '$', '%', '^', '&', '*', '=', '{', '}', '|', '[', ']', '\\', ':', ';', '<', '>', '?', ',', '/']
 
-- Field/column names will be automatically converted to lower case during the process.
+- Field/column names will be automatically converted to lower case during AttributeCode processing.
 - Technically, there are no required fields. However, if users want to extract license text from LicenseDB, users will want to fill in the ``license_expression`` fields with ScanCode's license key.
 
 .. note::
