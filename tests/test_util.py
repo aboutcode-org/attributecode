@@ -282,3 +282,17 @@ class TestMiscUtils(unittest.TestCase):
                                 ('resource', '/project/some_component')])]
         assert inventory == expected
         assert dup_cols_err == []
+
+    def test_convert_object_to_dict(self):
+        location = get_test_loc('test_util/load/simple_sample.csv')
+        base_dir = get_temp_dir()
+        errors, abouts = util.load_inventory(location)
+        assert errors == []
+
+        expected = {'name': 'cryptohash-sha256', 'version': 'v 0.11.100.1', 'download_url': '',
+                    'homepage_url': '', 'package_url': '', 'notes': '', 'license_expression': 'bsd-new and mit',
+                    'license_key': ['bsd-new', 'mit'], 'license_name': '', 'license_file': '', 'license_url': '',
+                    'copyright': '', 'notice_file': '', 'path': '/project/cryptohash-sha256'}
+        results = util.convert_object_to_dict(abouts[0])
+        assert results == expected
+

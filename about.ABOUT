@@ -1,6 +1,6 @@
 about_resource: .
 name: AttributeCode
-version: 1.0.0
+version: 2.0.0
 copyright: Copyright (c) nexB Inc.
 description: Tool for attribution notice generation
 

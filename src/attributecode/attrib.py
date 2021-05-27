@@ -30,6 +30,7 @@ from attributecode import CRITICAL
 from attributecode import ERROR
 from attributecode import Error
 from attributecode.util import add_unc
+from attributecode.util import convert_object_to_dict
 from attributecode.attrib_util import multi_sort
 
 
@@ -64,8 +65,14 @@ def generate(abouts, license_dict, min_license_score, template=None, variables=N
     utcnow = datetime.datetime.utcnow()
 
     try:
+        # Convert the field object to dictionary as it's needed for the
+        # groupby in JINJA2 template
+        about_dict_list = []
+        for about in abouts:
+            about_dict = convert_object_to_dict(about)
+            about_dict_list.append(about_dict)
         rendered = template.render(
-            abouts=abouts, license_dict=license_dict,
+            abouts=about_dict_list, license_dict=license_dict,
             min_license_score=min_license_score,
             utcnow=utcnow,
             tkversion=__version__,

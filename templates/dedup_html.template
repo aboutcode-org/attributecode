@@ -25,14 +25,14 @@ Read the JSON file to see what information can be extracted from the licenses.
         <div class="oss-table-of-contents">
             {% set component_title = [] %}
             {% for about_object in abouts %}
-                {% set comp = about_object.name.value %}
-                {% if about_object.version.value %}
-                    {% set comp = comp + about_object.version.value %}
+                {% set comp = about_object.name %}
+                {% if about_object.version %}
+                    {% set comp = comp + about_object.version %}
                 {% endif %}
                 {% if not comp in component_title%}
                     {# This is a hack to add component into a list without displaying #}
                     {{ component_title.append(comp) or "" }}
-                    <p><a href="#component_{{ loop.index0 }}">{{ about_object.name.value }}{% if about_object.version.value %} {{ about_object.version.value }}{% endif %}</a></p>
+                    <p><a href="#component_{{ loop.index0 }}">{{ about_object.name }}{% if about_object.version %} {{ about_object.version }}{% endif %}</a></p>
                 {% endif %}
             {% endfor %}
         </div>
@@ -42,31 +42,31 @@ Read the JSON file to see what information can be extracted from the licenses.
     {% set component_content = [] %}
 
     {% for about_object in abouts %}
-        {% set comp = about_object.name.value %}
-        {% if about_object.version.value %}
-            {% set comp = comp + about_object.version.value %}
+        {% set comp = about_object.name %}
+        {% if about_object.version %}
+            {% set comp = comp + about_object.version %}
         {% endif %}
         {% if not comp in component_content %}
             {# This is a hack to add into a list without displaying #}
             {{ component_content.append(comp) or "" }}
             <div class="oss-component" id="component_{{ loop.index0 }}">
-                <h3 class="component-name">{{ about_object.name.value }}
-                    {% if about_object.version.value %}{{ about_object.version.value }}{% endif %}
+                <h3 class="component-name">{{ about_object.name }}
+                    {% if about_object.version %}{{ about_object.version }}{% endif %}
                 </h3>
-                {% if about_object.license_expression.value %}
+                {% if about_object.license_expression %}
                     <p>This component is licensed under 
-                    {{ about_object.license_expression.value }}
+                    {{ about_object.license_expression }}
                 {% endif %}
-                {% if about_object.copyright.value %}
-                    <pre>{{about_object.copyright.value}}</pre>
+                {% if about_object.copyright %}
+                    <pre>{{about_object.copyright}}</pre>
                 {% endif %}
-                {% if about_object.notice_file.value %}
-                    {% for notice in about_object.notice_file.value %}
-                        <pre class="component-notice">{{ about_object.notice_file.value[notice] }}</pre>
+                {% if about_object.notice_file %}
+                    {% for notice in about_object.notice_file %}
+                        <pre class="component-notice">{{ about_object.notice_file[notice] }}</pre>
                     {% endfor %}
                 {% endif %}
-                {% if about_object.license_key.value %}
-                    {% for license_key in about_object.license_key.value %}
+                {% if about_object.license_key %}
+                    {% for license_key in about_object.license_key %}
                         {% if license_key in license_dict %}
                             <p>Full text of
                                 <a class="{{ license_key }}" href="#component-license-{{ license_key }}">
@@ -76,10 +76,10 @@ Read the JSON file to see what information can be extracted from the licenses.
                         {% endif %}
                      {% endfor %}
                 {% endif %}
-                {% if about_object.license_file.value %}
-                    {% for lic_file_name in about_object.license_file.value %}
-                        {% if about_object.license_file.value[lic_file_name] %}
-                            <pre>{{ about_object.license_file.value[lic_file_name] | e}}</pre>
+                {% if about_object.license_file %}
+                    {% for lic_file_name in about_object.license_file %}
+                        {% if about_object.license_file[lic_file_name] %}
+                            <pre>{{ about_object.license_file[lic_file_name] | e}}</pre>
                         {% endif %}
                     {% endfor %}
                 {% endif %}

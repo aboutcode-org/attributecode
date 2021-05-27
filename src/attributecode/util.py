@@ -380,3 +380,20 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
 
     return unique(errors), abouts
 
+def convert_object_to_dict(about):
+    """
+    Convert the list of field object
+        [Field(name='name', value=''), Field(name='version', value='')]
+    to a dictionary
+    """
+    about_dict = {}
+    # Convert all the supported fields into a dictionary
+    fields_dict = getattr(about, 'fields')
+    custom_fields_dict = getattr(about, 'custom_fields')
+    supported_dict = {**fields_dict, **custom_fields_dict}
+    for field in supported_dict:
+        key = supported_dict[field].name
+        value = supported_dict[field].value
+        about_dict[key] = value
+    return about_dict
+
