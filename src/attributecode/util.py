@@ -397,3 +397,16 @@ def convert_object_to_dict(about):
         about_dict[key] = value
     return about_dict
 
+def number_of_component_generated_from_default_template(location):
+    """
+    Return number of component generated from the default template.
+    """
+    lines = []
+    with open(location) as f:
+        lines = f.readlines()
+    count = 0
+    for line in lines:
+        if '<h3 class="component-name">' in line:
+            if line.replace('<h3 class="component-name">', '').strip():
+                count += 1
+    return count

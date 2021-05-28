@@ -39,6 +39,7 @@ from attributecode.model import pre_process_and_fetch_license_dict
 from attributecode.util import filter_errors
 from attributecode.util import get_file_text
 from attributecode.util import load_inventory
+from attributecode.util import number_of_component_generated_from_default_template
 
 
 __copyright__ = """
@@ -298,6 +299,7 @@ Generate attribution from JSON, CSV or Excel file.
                 else:
                     errors.append(error)
 
+
     rendered = ''
     if abouts:
         attrib_errors, rendered = generate_attribution_doc(
@@ -314,7 +316,14 @@ Generate attribution from JSON, CSV or Excel file.
     errors_count = report_errors(errors, quiet, verbose, log_file_loc=output + '-error.log')
 
     if rendered:
-        msg = 'Attribution generated at: {output}'.format(**locals())
+        # Check if the default template is used
+        import filecmp
+        default_template = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../templates/default_html.template')
+        if filecmp.cmp(default_template, template):
+            num_comps = number_of_component_generated_from_default_template(output)
+            msg = '{num_comps} component(s) is/are in the generated attribution at the {output}'.format(**locals())
+        else:
+            msg = 'Attribution generated at: {output}'.format(**locals())
         click.echo(msg)
     else:
         msg = 'Attribution generation failed.'

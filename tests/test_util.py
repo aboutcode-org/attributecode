@@ -296,3 +296,8 @@ class TestMiscUtils(unittest.TestCase):
         results = util.convert_object_to_dict(abouts[0])
         assert results == expected
 
+    def test_number_of_component_generated_from_default_template(self):
+        location = get_test_loc(
+            'test_attrib/default_template/expect.html')
+        num_component = util.number_of_component_generated_from_default_template(location)
+        assert num_component == 2
