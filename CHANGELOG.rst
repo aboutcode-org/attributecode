@@ -1,5 +1,10 @@
 Release notes
 -------------
+### Version 2.0.1
+
+2021-05-28
+ - Update template wording
+
 ### Version 2.0.0
 
 2021-05-28
