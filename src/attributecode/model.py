@@ -276,6 +276,13 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     for about in abouts:
         lic_list = []
         if scancode:
+<<<<<<< HEAD
+            lic_list = []
+            # Get all the detected license key from the component.
+            for lic in about.licenses.value:
+                if not lic['key'] in lic_list:
+                    lic_list.append(lic['key'])
+=======
             if about.license_expressions.value:
                 lic_list = []
                 for lic_exp in about.license_expressions.value:
@@ -285,6 +292,7 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
                                 if not lic_key in lic_list:
                                     lic_list.append(lic_key)
                 #lic_list = list(set(about.license_expressions.value))
+>>>>>>> branch '13_issue_with_conditional_license_exp' of https://github.com/nexB/attributecode.git
         else:
             if not about.license_expression.value:
                 continue
