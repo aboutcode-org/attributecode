@@ -277,7 +277,14 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
         lic_list = []
         if scancode:
             if about.license_expressions.value:
-                lic_list = list(set(about.license_expressions.value))
+                lic_list = []
+                for lic_exp in about.license_expressions.value:
+                    if ' OR ' in lic_exp  or ' AND ' in lic_exp:
+                        for lic_key in lic_exp.split():
+                            if not lic_key == 'OR' and not lic_key == 'AND':
+                                if not lic_key in lic_list:
+                                    lic_list.append(lic_key)
+                #lic_list = list(set(about.license_expressions.value))
         else:
             if not about.license_expression.value:
                 continue
@@ -315,13 +322,12 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
                         else:
                             errors.append(error)
                     else:
-                        msg = ("One of the URLs (or both) is not reachable: " + '\n' +
+                        msg = ("The following URL is not reachable: " + '\n' +
                             license_url + '\n' + license_text_url)
                         errors.append(Error(ERROR, msg)) 
                 except:
                     msg = "License key, " + lic_key + ", not recognize."
                     errors.append(Error(ERROR, msg))
-
     return license_data_dict, errors
 
 def parse_license_expression(lic_expression):

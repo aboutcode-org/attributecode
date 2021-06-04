@@ -272,8 +272,8 @@ Generate attribution from JSON, CSV or Excel file.
 
     licensedb_url = 'https://scancode-licensedb.aboutcode.org/'
     license_dict, lic_errors = pre_process_and_fetch_license_dict(abouts, licensedb_url, scancode, reference)
+
     errors.extend(lic_errors)
-    sorted_license_dict = sorted(license_dict)
 
     # Read the license_file and store in a dictionary
     for about in abouts:
