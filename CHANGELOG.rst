@@ -1,5 +1,12 @@
 Release notes
 -------------
+
+### Version 2.1.1
+
+2021-06-23
+ - Update with the latest skeleton which incude the configuration scripts and others
+ - Remove the thirdparty/
+
 ### Version 2.0.1
 
 2021-05-28
