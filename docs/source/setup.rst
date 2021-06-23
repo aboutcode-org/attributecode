@@ -38,13 +38,13 @@ To activate the virtualenv, run (on posix):
 
 .. code-block:: none
 
-    source bin/activate
+    source tmp/bin/activate
 
 or on windows:
 
 .. code-block:: none
 
-    bin\\activate
+    tmp\\bin\\activate
 
 TESTS and DEVELOPMENT
 ---------------------
@@ -52,16 +52,16 @@ To install all the needed development dependencies, run (on posix):
 
 .. code-block:: none
 
-    source configure etc/conf/dev
+    source configure --dev
 
 or on windows:
 
 .. code-block:: none
 
-    configure etc/conf/dev
+    configure --dev
 
 To verify that everything works fine you can run the test suite with:
 
 .. code-block:: none
 
-    py.test
+    pytest
