@@ -21,7 +21,6 @@
 /share/
 /tcl/
 /.eggs/
-.venv/
 
 # Installer logs
 pip-log.txt

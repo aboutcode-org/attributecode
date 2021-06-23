@@ -6,23 +6,17 @@ Options:
   --version                    Show the version and exit.
   -c, --configuration FILE     Path to an optional YAML configuration file for
                                renaming fields name.
-
   --min-license-score INTEGER  Attribute components that have license score
                                higher than the defined --min-license-score.
-
   --scancode                   Indicate the input JSON file is from
                                scancode_toolkit.
-
   --reference DIR              Path to a directory with reference files where
                                "license_file" and/or "notice_file" located.
-
   --template FILE              Path to an optional custom attribution template
                                to generate the attribution document. If not
                                provided the default built-in template is used.
-
   --vartext <key>=<value>      Add variable text as key=value for use in a
                                custom attribution template.
-
   -q, --quiet                  Do not print error or warning messages.
   --verbose                    Show all error and warning messages.
   -h, --help                   Show this message and exit.
