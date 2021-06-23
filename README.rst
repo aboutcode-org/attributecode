@@ -26,7 +26,7 @@ Build and tests status
 +-------+-----------------+
 |Branch | **Linux/macOS** |
 +=======+=================+
-|Main | |    main-posix|  |
+|Main   |  |main-posix|   |
 +-------+-----------------+
 
 
