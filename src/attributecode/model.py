@@ -13,17 +13,6 @@
 #  limitations under the License.
 # ============================================================================
 
-"""
-AboutCode toolkit is a tool to process ABOUT files. ABOUT files are
-small text files that document the provenance (aka. the origin and
-license) of software components as well as the essential obligation
-such as attribution/credits and source code redistribution. See the
-ABOUT spec at http://dejacode.org.
-
-AboutCode toolkit reads and validates ABOUT files and collect software
-components inventories.
-"""
-
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
