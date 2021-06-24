@@ -79,7 +79,7 @@ def load_csv(location, configuration=None):
     mapping_dict = {}
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     # FIXME: why ignore encoding errors here?
     with codecs.open(location, mode='rb', encoding='utf-8-sig',
                      errors='ignore') as csvfile:
@@ -109,7 +109,7 @@ def load_excel(location, configuration=None):
     mapping_dict = {}
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     while index <= max_col:
         value = sheet_obj.cell(row=1, column=index).value
         if value in col_keys:
@@ -143,7 +143,7 @@ def load_scancode_json(location, configuration=None):
     updated_results = []
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     with open(location) as json_file:
         results = json.load(json_file)
     results = results['files']
