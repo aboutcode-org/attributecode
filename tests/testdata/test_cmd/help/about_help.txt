@@ -1,6 +1,6 @@
 Usage: attributecode [OPTIONS] INPUT OUTPUT
 
-  Generate attribution from JSON, CSV or Excel file.
+  Generate attribution from a JSON, CSV or Excel file.
 
 Options:
   --version                    Show the version and exit.
