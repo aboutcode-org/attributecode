@@ -248,7 +248,7 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     license_data_dict = {}
     captured_license = []
     errors = []
-    if util.have_network_connection():
+    if util.is_online():
         try:
             request = Request(url)
             urlopen(request)

@@ -175,8 +175,7 @@ def load_json(location):
     return results
 
 
-# FIXME: rename to is_online: BUT do we really need this at all????
-def have_network_connection():
+def is_online():
     """
     Return True if an HTTP connection to some public web site is possible.
     """
