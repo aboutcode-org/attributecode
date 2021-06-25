@@ -44,7 +44,7 @@ or on windows:
 
 .. code-block:: none
 
-    tmp\\bin\\activate
+    tmp\bin\activate
 
 TESTS and DEVELOPMENT
 ---------------------

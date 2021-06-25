@@ -33,7 +33,7 @@ Input Requirement
    ['!', '@', '#', '$', '%', '^', '&', '*', '=', '{', '}', '|', '[', ']', '\\', ':', ';', '<', '>', '?', ',', '/']
 
 - Field/column names will be automatically converted to lower case during AttributeCode processing.
-- Technically, there are no required fields. However, if users want to extract license text from LicenseDB, users will want to fill in the ``license_expression`` fields with ScanCode's license key.
+- Technically, there are no required fields. However, if users want to extract license text from the LicenseDB, users will need to fill in the ``license_expression`` fields with ScanCode's license key.
 
 .. note::
     In the provided default template, the tool takes the following from the input: 'name', 'version', 'licesne_expression', 'copyright' etc. It is encourge to use the same keys in the input for the use of the default template, OR user can use the "-c, --configuration" option to do the key mapping, OR user can edit the template to use its own input keys.

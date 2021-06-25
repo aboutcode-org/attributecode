@@ -38,7 +38,7 @@ Command
 -------------------
 
 This is used for field renaming purpose.
-This configuration file is a YAML formatted file.
+The configuration file has to be a YAML formatted file.
 
 The syntax is
 ``<current>: <new>``
@@ -51,11 +51,18 @@ For instance,
     Confirmed Version: version
     License Expression: license_expression
 
+With the above configuration file, the tool will rename the ``Component`` to ``name``,
+``Confirmed Version`` to ``version`` and ``License Expression`` to ``license_expression``.
+
 --scancode
 ----------
 
-As stated in the description, this is to tell the tool that the input is from ScanCode Toolkit.
-Note that we currently only accept JSON from ScanCode Toolkit.
+This option is to tell the tool the input is the scan result from the ScanCode Toolkit.
+Note that the tool only accept JSON formatted file.
+
+.. code-block:: none
+
+    attributecode --scancode <input.json> <output.html>
 
 
 --min-license-score
@@ -71,13 +78,13 @@ For instance, if we want to show everything that has a license score greater tha
 Other detected licenses whose license scores are less than 40 will not be collected.
 This option can only work with a ScanCode JSON input, and therefore the ``--scancode`` option flag is needed.
 
-.. Note:: The ``DEFAULT_LICENSE_SCORE`` is set to 100.
+.. Note:: The ``DEFAULT_LICENSE_SCORE`` is set to 100. Meaning ``attributecode --scancode <input.json> <output.html>`` will only collect licenses that have detected license score = 100
 
 
 --reference
 -----------
 
-When the input has "license_file" or "notice_file" fields set, the tool needs to know where to read these files.
+When the input has "license_file" or "notice_file" fields set, the tool needs to know where to read/get these files.
 
 .. code-block:: none
 
@@ -93,7 +100,7 @@ Point to the custom template.
 
     attributecode --template templates/scancode.template --scancode <input.json> <output.html>
 
-.. Note:: ``templates/scancode.template`` is a custom template specifically for ScanCode's JSON input.
+.. Note:: ``templates/scancode.template`` is a custom template specifically for ScanCode's JSON input. The ``templates/default_html.template`` will be used if no ``--template`` is provided.
 
 
 --vartext <key>=<value>
@@ -106,7 +113,7 @@ Pass variable(s) to the Jinja2 template.
     attributecode --vartext "subtitle=THIS IS A SUBTITLE" <input.csv> <output.csv>
 
 The above command passes the variable ``subtitle`` to the Jinja2 template. If users want to
-access this variable, they can simply use ``{{ variables['subtitle'] }}`` to get the data.
+access this variable, they can use ``{{ variables['subtitle'] }}`` to get the data.
 
 
 Examples
