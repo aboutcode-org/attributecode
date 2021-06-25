@@ -26,9 +26,9 @@ Read the JSON file to see what information can be extracted from the licenses.
 		{% for about_object in abouts %}
 			{% set glob={'handled': True} %}
 			{% set index = loop.index0 %}
-			{% for lic in about_object.licenses.value if lic.score >= min_license_score %} {# license score condition #}
+			{% for lic in about_object.licenses if lic.score >= min_license_score %} {# license score condition #}
 				{% if glob['handled'] %}
-					<p><a href="#component_{{ index }}">{{ about_object.name.value }}{% if about_object.version.value %} {{ about_object.version.value }}{% endif %}</a></p>
+					<p><a href="#component_{{ index }}">{{ about_object.name }}{% if about_object.version %} {{ about_object.version }}{% endif %}</a></p>
 					{% set _ = glob.update({'handled':false}) %}
 				{% endif %}
 			{% endfor %}
@@ -41,7 +41,7 @@ Read the JSON file to see what information can be extracted from the licenses.
     {% for about_object in abouts %}
 		{% set component_licenses = [] %}
 		{% set index = loop.index0 %}
-		{% for lic in about_object.licenses.value if lic.score >= min_license_score %} {# license score condition #}
+		{% for lic in about_object.licenses if lic.score >= min_license_score %} {# license score condition #}
 			{% if not lic.key in component_licenses %}
 				{{ component_licenses.append(lic.key)|default("", True) }}
 				{{ all_licenses.append(lic.key)|default("", True) }}
@@ -50,15 +50,15 @@ Read the JSON file to see what information can be extracted from the licenses.
 	
 		{% if component_licenses %}
 			<div class="oss-component" id="component_{{ index }}">
-				<h3 class="component-name">{{ about_object.name.value }}
-					{% if about_object.version.value %}{{ about_object.version.value }}{% endif %}
+				<h3 class="component-name">{{ about_object.name }}
+					{% if about_object.version %}{{ about_object.version }}{% endif %}
 				</h3>
 				<p>This component is licensed under 
 				{% for license_key in component_licenses %}
 					{{ license_key }}
 				{% endfor %}
-				{% if about_object.copyrights.value %}
-					{% for copyright in about_object.copyrights.value %}
+				{% if about_object.copyrights %}
+					{% for copyright in about_object.copyrights %}
 						<pre>{{copyright['value']}}</pre>
 					{% endfor %}
 				{% endif %}

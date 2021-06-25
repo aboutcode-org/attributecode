@@ -79,7 +79,7 @@ def load_csv(location, configuration=None):
     mapping_dict = {}
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     # FIXME: why ignore encoding errors here?
     with codecs.open(location, mode='rb', encoding='utf-8-sig',
                      errors='ignore') as csvfile:
@@ -109,7 +109,7 @@ def load_excel(location, configuration=None):
     mapping_dict = {}
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     while index <= max_col:
         value = sheet_obj.cell(row=1, column=index).value
         if value in col_keys:
@@ -143,20 +143,22 @@ def load_scancode_json(location, configuration=None):
     updated_results = []
     if configuration:
         with open(configuration) as file:
-            mapping_dict = yaml.load(file)
+            mapping_dict = yaml.safe_load(file)
     with open(location) as json_file:
         results = json.load(json_file)
     results = results['files']
     if mapping_dict:
         for item in results:
+            updated_item = {}
             for key in item:
                 if key in mapping_dict:
-                    item[mapping_dict[key]] = item[key]
-                    del item[key]
-            updated_results.append(item)
+                    updated_item[mapping_dict[key]] = item[key]
+                else:
+                    updated_item[key] = item[key]
+            updated_results.append(updated_item)
     else:
         updated_results = results
-    return results
+    return updated_results
 
 
 def load_json(location):
@@ -173,8 +175,7 @@ def load_json(location):
     return results
 
 
-# FIXME: rename to is_online: BUT do we really need this at all????
-def have_network_connection():
+def is_online():
     """
     Return True if an HTTP connection to some public web site is possible.
     """
@@ -365,7 +366,7 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
         return errors, abouts
 
     for component in inventory:
-        about = model.About(component)
+        about = model.About()
         ld_errors = about.load_dict(
             component,
             scancode=scancode,
@@ -378,3 +379,33 @@ def load_inventory(location, configuration=None, scancode=False, reference_dir=N
 
     return unique(errors), abouts
 
+def convert_object_to_dict(about):
+    """
+    Convert the list of field object
+        [Field(name='name', value=''), Field(name='version', value='')]
+    to a dictionary
+    """
+    about_dict = {}
+    # Convert all the supported fields into a dictionary
+    fields_dict = getattr(about, 'fields')
+    custom_fields_dict = getattr(about, 'custom_fields')
+    supported_dict = {**fields_dict, **custom_fields_dict}
+    for field in supported_dict:
+        key = supported_dict[field].name
+        value = supported_dict[field].value
+        about_dict[key] = value
+    return about_dict
+
+def number_of_component_generated_from_default_template(location):
+    """
+    Return number of component generated from the default template.
+    """
+    lines = []
+    with open(location) as f:
+        lines = f.readlines()
+    count = 0
+    for line in lines:
+        if '<h3 class="component-name">' in line:
+            if line.replace('<h3 class="component-name">', '').strip():
+                count += 1
+    return count

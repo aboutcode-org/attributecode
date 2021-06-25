@@ -34,7 +34,7 @@ from attributecode import INFO
 from attributecode import WARNING
 from attributecode import Error
 from attributecode import model
-from attributecode.util import add_unc, on_windows
+from attributecode.util import add_unc, on_windows, is_online
 from attributecode.util import load_csv
 from attributecode.util import to_posix
 
@@ -141,9 +141,9 @@ class CollectorTest(unittest.TestCase):
 
 class FetchLicenseTest(unittest.TestCase):
 
-    @mock.patch('attributecode.util.have_network_connection')
-    def test_pre_process_and_fetch_license_dict(self, have_network_connection):
-        have_network_connection.return_value = False
+    @mock.patch('attributecode.util.is_online')
+    def test_pre_process_and_fetch_license_dict(self, is_online):
+        is_online.return_value = False
         licensedb_url = 'https://scancode-licensedb.aboutcode.org/'
         error_msg = (
             'Network problem. Please check your Internet connection. '
@@ -151,7 +151,7 @@ class FetchLicenseTest(unittest.TestCase):
         expected = ({}, [Error(ERROR, error_msg)])
         assert model.pre_process_and_fetch_license_dict([], licensedb_url, False) == expected
 
-        have_network_connection.return_value = True
+        is_online.return_value = True
         expected = ({}, [])
         assert model.pre_process_and_fetch_license_dict([], licensedb_url, False) == expected
 

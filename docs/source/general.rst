@@ -7,26 +7,33 @@ General
 
 Objective
 =========
-- Create an Attribution Notice generation tool that can be used with many different types of input (e.g., spreadsheet, scan json etc.).
-- Take the opportunity to create the best-in-class FOSS Attribution Notice generation tool.
-- Provide a customizable Attribution Notice generation tool for DejaCode.
-
+- Create an Attribution Notice generation tool that can be used with many different types of input - e.g., spreadsheet, JSON and others.
+- Provide a customizable Attribution Notice generation tool for ScanCode.
 
 Features
 ========
-- Accept data from multiple formats starting with:
+- Accept data in multiple formats starting with:
 
   - A spreadsheet file (csv or xlsx).
-  - A new JSON file format for Attribution that would have the primary Attribution fields.
-  - A ScanCode JSON file.
+  - A ScanCode JSON file. 
+  - Any JSON file format that has the primary Attribution fields.
 
-- Transform function to map incoming data to Attribution output fields.
+
+- A configuration option to map input data to Attribution output fields.
 - Jinja templates to customize the Attribution Notice output.
 - Access to a database of license texts based on ScanCode license keys.
 
 
 Input Requirement
 =================
-- Field/column names cannot contain any special characters or spaces.
-- Field/column names will automatically be converted to lower case during the process.
-- Technically, there are no required fields. However, if users want to extract license text from licensedb, users will want to fill in the ``license_expression`` fields with ScanCode's license key.
+- Field/column names cannot contain any special characters or spaces. 
+
+.. note::
+   The following are special characters that the tool does not support:
+   ['!', '@', '#', '$', '%', '^', '&', '*', '=', '{', '}', '|', '[', ']', '\\', ':', ';', '<', '>', '?', ',', '/']
+
+- Field/column names will be automatically converted to lower case during AttributeCode processing.
+- Technically, there are no required fields. However, if users want to extract license text from the LicenseDB, users will need to fill in the ``license_expression`` fields with ScanCode's license key.
+
+.. note::
+    In the provided default template, the tool takes the following from the input: 'name', 'version', 'licesne_expression', 'copyright' etc. It is encourge to use the same keys in the input for the use of the default template, OR user can use the "-c, --configuration" option to do the key mapping, OR user can edit the template to use its own input keys.

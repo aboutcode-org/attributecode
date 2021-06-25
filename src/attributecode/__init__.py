@@ -22,7 +22,7 @@ from collections import namedtuple
 import logging
 import os
 
-__version__ = '0.0.1'
+__version__ = '2.1.1'
 
 __copyright__ = """
 Copyright (c) nexB Inc. All rights reserved. http://dejacode.org

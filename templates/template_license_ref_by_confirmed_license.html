@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+	<style type="text/css">
+		div.additional-license-text-list {display:block}
+		body {font-family: Helvetica, Arial, sans-serif;}
+		pre {white-space: pre-wrap;}
+		li {font-weight: bold;}
+		#header {font-family: Helvetica; font-style:italic}
+	</style>
+	<title>License Reference</title>
+</head>
+<body>
+	<h1>License Reference</h1>
+	<pre id="header">
+
+This document lists the open source and third-party components of a [COMPANY] product with additional information regarding licenses, acknowledgments and required copyright notices for these components.
+
+	</pre>
+
+	<hr>
+	<div class="oss-table-of-contents">
+		{% for group in abouts | groupby('license_expression') %}
+		<p>
+			<a href="#group_{{ loop.index0 }}">{{ group.grouper }}
+			</a>
+		</p>
+		{% endfor %}
+	</div>
+	<hr>
+
+	{% for group in abouts | groupby('license_expression') %}
+	<div id="group_{{ loop.index0 }}">
+	<h3>{{ group.grouper }}</h3>
+	<p>This product contains the following open source software packages licensed under the terms of the license: {{group.grouper}}</p>
+	
+	<div class="oss-component" id="component_{{ loop.index0 }}">
+        {% set glob={} %}
+		{%for about_object in group.list %} 
+		
+		{% if loop.first %}
+			{% if about_object.license_url %}
+    		    <p>License Gallery URL: <a href="{{about_object.license_url }}">{{about_object.license_url }}</a> </p>
+    		{% endif %}
+    	{% endif %}
+
+        {% set name_version = about_object.name + about_object.version %}
+        {% if glob[name_version] %}
+            {# PASS #}
+        {% else %}         
+            <li>{{ about_object.name }}{% if about_object.version %}  - Version  {{ about_object.version }}{% endif %}</li>		
+            {% if about_object.copyright %}<pre>{{about_object.copyright}}</pre>{% endif %}
+            {% if about_object.notice %}<pre>{{ about_object.notice }}</pre>
+            {% elif about_object.notice_file %} <pre class="component-notice">{{ about_object.notice_text }}</pre>
+            {% endif %}
+            {% set about_dict = glob.update({name_version: True}) %}
+        {% endif %}
+        {% if loop.last %}
+			{% for key in about_object.license_key %}
+				<pre>{{ license_dict[key].license_text|e }}</pre>
+				{% if license_dict[key].homepage_url %}
+					<pre>({{ license_dict[key].homepage_url|e }})</pre>
+				{% endif %}
+			{% endfor %}
+        {% endif %}
+	</div>
+	{% endfor %}
+	</div>
+	{% endfor %}
+	<hr>
+</div>
+<hr> 
+<h3><a id="End">End</a></h3>
+</body>
+</html>

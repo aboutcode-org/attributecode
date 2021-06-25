@@ -13,17 +13,6 @@
 #  limitations under the License.
 # ============================================================================
 
-"""
-AboutCode toolkit is a tool to process ABOUT files. ABOUT files are
-small text files that document the provenance (aka. the origin and
-license) of software components as well as the essential obligation
-such as attribution/credits and source code redistribution. See the
-ABOUT spec at http://dejacode.org.
-
-AboutCode toolkit reads and validates ABOUT files and collect software
-components inventories.
-"""
-
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -47,6 +36,7 @@ from attributecode import INFO
 from attributecode import WARNING
 from attributecode import Error
 from attributecode import util
+
 
 
 class Field(object):
@@ -80,7 +70,7 @@ class Field(object):
     def __repr__(self):
         name = self.name
         value = self.value
-        r = ('Field(name=%(name)r, value=%(value)r')
+        r = ('Field(name=%(name)r, value=%(value)r)')
         return r % locals()
 
 def validate_field_name(name):
@@ -131,6 +121,9 @@ class About(object):
         self.set_standard_fields()
         self.custom_fields = OrderedDict()
         self.errors = []
+
+    def __repr__(self):
+        return repr(self.all_fields())
 
     def all_fields(self):
         """
@@ -255,7 +248,7 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     license_data_dict = {}
     captured_license = []
     errors = []
-    if util.have_network_connection():
+    if util.is_online():
         try:
             request = Request(url)
             urlopen(request)
@@ -272,8 +265,11 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     for about in abouts:
         lic_list = []
         if scancode:
-            if about.license_expressions.value:
-                lic_list = list(set(about.license_expressions.value))
+            lic_list = []
+            # Get all the detected license key from the component.
+            for lic in about.licenses.value:
+                if not lic['key'] in lic_list:
+                    lic_list.append(lic['key'])
         else:
             if not about.license_expression.value:
                 continue
@@ -311,13 +307,12 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
                         else:
                             errors.append(error)
                     else:
-                        msg = ("One of the URLs (or both) is not reachable: " + '\n' +
+                        msg = ("The following URL is not reachable: " + '\n' +
                             license_url + '\n' + license_text_url)
                         errors.append(Error(ERROR, msg)) 
                 except:
                     msg = "License key, " + lic_key + ", not recognize."
                     errors.append(Error(ERROR, msg))
-
     return license_data_dict, errors
 
 def parse_license_expression(lic_expression):

@@ -5,12 +5,12 @@
       "tool_version": "3.2.1rc2",
       "options": {
         "input": [
-          "C:\\Users\\thoma\\Downloads\\clean-text-0.3.0"
+          "C:\\Users\\XYZ\\Downloads\\clean-text-0.3.0"
         ],
         "--copyright": true,
         "--email": true,
         "--info": true,
-        "--json-pp": "C:\\Users\\thoma\\Downloads\\clean-text-0.3.0-lceupi.json",
+        "--json-pp": "C:\\Users\\XYZ\\Downloads\\clean-text-0.3.0-lceupi.json",
         "--license": true,
         "--package": true,
         "--processes": "4",
