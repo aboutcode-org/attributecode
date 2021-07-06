@@ -1,6 +1,9 @@
 Release notes
 -------------
 
+### Version x.x.x
+ - Implement option for custum licenseDB url
+
 ### Version 2.1.1
 
 2021-06-23
