@@ -149,10 +149,9 @@ class FetchLicenseTest(unittest.TestCase):
             'Network problem. Please check your Internet connection. '
             'License fetching is skipped.')
         expected = ({}, [Error(ERROR, error_msg)])
-        assert model.pre_process_and_fetch_license_dict([], licensedb_url, False) == expected
+        assert model.pre_process_and_fetch_license_dict([], None, False) == expected
 
         is_online.return_value = True
         expected = ({}, [])
-        assert model.pre_process_and_fetch_license_dict([], licensedb_url, False) == expected
-
+        assert model.pre_process_and_fetch_license_dict([], None, False) == expected
 

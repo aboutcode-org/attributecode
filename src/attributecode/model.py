@@ -30,6 +30,7 @@ import urllib.request
 from license_expression import Licensing
 
 from attributecode import __version__
+from attributecode import api
 from attributecode import CRITICAL
 from attributecode import ERROR
 from attributecode import INFO
@@ -239,7 +240,7 @@ class About(object):
         self.errors = errors
         return errors
 
-def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
+def pre_process_and_fetch_license_dict(abouts, djc, scancode, reference=None):
     """
     Parse the license expression from the about object and return a dictionary
     list with license key as a key and its corresponding license information as
@@ -248,12 +249,15 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
     license_data_dict = {}
     captured_license = []
     errors = []
+    if djc:
+        # Strip the ' and " for api_url, and api_key from input
+        url = djc[0].strip("'").strip('"')
+        api_key = djc[1].strip("'").strip('"')
+    else:
+        url = 'https://scancode-licensedb.aboutcode.org/'
     if util.is_online():
-        try:
-            request = Request(url)
-            urlopen(request)
-        except:
-            msg = u"URL not reachable. Invalid License DB url."
+        if not valid_api_url(url):
+            msg = u"URL not reachable. Invalid 'url'. License generation is skipped."
             errors.append(Error(ERROR, msg))
     else:
         msg = u'Network problem. Please check your Internet connection. License fetching is skipped.'
@@ -282,38 +286,82 @@ def pre_process_and_fetch_license_dict(abouts, url, scancode, reference=None):
                     continue
         for lic_key in lic_list:
             if not lic_key in captured_license:
-                license_url = url + lic_key + '.json'
-                license_text_url = ''
-                try:
-                    json_url = urlopen(license_url)
-                    data = json.loads(json_url.read())
-                    license_text_url = url + data['key'] + '.LICENSE'
-                    license_dict = data
-                    license_text = urllib.request.urlopen(license_text_url).read().decode('utf-8')
-                    license_dict['license_text'] = license_text
-                    captured_license.append(lic_key)
-                    license_data_dict[lic_key] = license_dict
-                except urllib.error.HTTPError:
-                    # license_expression key not found in LicenseDB
-                    # but license_file field present
-                    if about.license_file.value:
-                        file_name = about.license_file.value
-                        error, text = util.get_file_text(file_name, reference)
-                        if not error:
-                            license_dict = {}
-                            license_dict['key'] = lic_key
-                            license_dict['license_text'] = text
-                            license_data_dict[lic_key] = license_dict
-                        else:
-                            errors.append(error)
+                captured_license.append(lic_key)
+                if djc:
+                    # No need to go through all the about objects for license extraction if we detected
+                    # invalid '--api_key'
+                    auth_error = Error(ERROR, u"Authorization denied. Invalid '--api_key'. License generation is skipped.")
+                    if auth_error in errors:
+                        break
+                    license_data, errs = api.get_license_details_from_api(url, api_key, lic_key)
+                    if errs:
+                        for e in errs:
+                            if u"Invalid 'license'" in e.message:
+                                if about.license_file.value:
+                                    file_name = about.license_file.value
+                                    error, text = util.get_file_text(file_name, reference)
+                                    if not error:
+                                        license_dict = {}
+                                        license_dict['key'] = lic_key
+                                        license_dict['license_text'] = text
+                                        license_data_dict[lic_key] = license_dict
+                                    else:
+                                        errors.append(error)
+                                else:
+                                    errors.append(e)
+                            else:
+                                errors.append(e)
                     else:
-                        msg = ("The following URL is not reachable: " + '\n' +
-                            license_url + '\n' + license_text_url)
-                        errors.append(Error(ERROR, msg)) 
-                except:
-                    msg = "License key, " + lic_key + ", not recognize."
-                    errors.append(Error(ERROR, msg))
+                        license_dict = license_data
+                        license_dict['license_text'] = license_data.get('full_text', '')
+                        license_data_dict[lic_key] = license_dict
+                else:
+                    license_url = url + lic_key + '.json'
+                    license_text_url = ''
+                    try:
+                        json_url = urlopen(license_url)
+                        data = json.loads(json_url.read())
+                        license_text_url = url + data['key'] + '.LICENSE'
+                        license_dict = data
+                        license_text = urllib.request.urlopen(license_text_url).read().decode('utf-8')
+                        license_dict['license_text'] = license_text
+                        license_data_dict[lic_key] = license_dict
+                    except urllib.error.HTTPError:
+                        # license_expression key not found in LicenseDB
+                        # but license_file field present
+                        if about.license_file.value:
+                            file_name = about.license_file.value
+                            error, text = util.get_file_text(file_name, reference)
+                            if not error:
+                                license_dict = {}
+                                license_dict['key'] = lic_key
+                                license_dict['license_text'] = text
+                                license_data_dict[lic_key] = license_dict
+                            else:
+                                errors.append(error)
+                        else:
+                            msg = ("The following URL is not reachable: " + '\n' +
+                                license_url + '\n' + license_text_url)
+                            errors.append(Error(ERROR, msg)) 
+                    except:
+                        msg = "License key, " + lic_key + ", not recognize."
+                        errors.append(Error(ERROR, msg))
     return license_data_dict, errors
+
+def valid_api_url(api_url):
+    try:
+        request = Request(api_url)
+        urlopen(request)
+        return True
+    except HTTPError as http_e:
+        # The 403 error code is refer to "Authentication credentials were not provided.".
+        # This is correct as no key are provided.
+        if http_e.code == 403:
+            return True
+    except:
+        # All other exceptions yield to invalid api_url
+        pass
+    return False
 
 def parse_license_expression(lic_expression):
     licensing = Licensing()
