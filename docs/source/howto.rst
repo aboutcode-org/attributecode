@@ -19,8 +19,9 @@ Command
       --version                    Show the version and exit.
       -c, --configuration FILE     Path to an optional YAML configuration file for
                                    renaming fields name.
-      --licensedb-url URL          URL to the custom LicenseDB (default:
-                                   https://scancode-licensedb.aboutcode.org/)
+      --djc URL KEY                URL to DejaCode License Library and the API
+                                   KEY. (default: https://scancode-
+                                   licensedb.aboutcode.org/)
       --min-license-score INTEGER  Attribute components that have license score
                                    higher than the defined --min-license-score.
       --scancode                   Indicate the input JSON file is from
@@ -57,14 +58,14 @@ With the above configuration file, the tool will rename the ``Component`` to ``n
 ``Confirmed Version`` to ``version`` and ``License Expression`` to ``license_expression``.
 
 
---licensedb-url
+--djc
 ---------------
 
-This option allow user to define the URL for the LicenseDB.
+This option allows user to to use Dejacode License Library instead of the default LicenseDB.
 
 .. code-block:: none
 
-    attributecode --licensedb-url <LicenseDB URL> <input.json> <output.html>
+    attributecode --djc <URL> <API KEY> <input.json> <output.html>
 
 
 --scancode
