@@ -2,7 +2,7 @@ Release notes
 -------------
 
 ### Version x.x.x
- - Implement option for custum licenseDB url
+ - Implement option to use Dejacode License Library instead of the default LicenseDB 
 
 ### Version 2.1.1
 
