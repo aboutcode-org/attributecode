@@ -1,8 +1,11 @@
 =============
-AttributeCode
+[ARCHIVED] AttributeCode
 =============
 
-Tool for Attribution Notice generation.
+This project was an Attribution generation tool with many content and format options for the input data. 
+
+All features have been folded back in the latest AboutCode Toolkit at https://github.com/nexB/aboutcode-toolkit
+
 
 Read more about AttributeCode `here <https://nexb-attributecode.readthedocs-hosted.com/en/latest/>`_.
 
